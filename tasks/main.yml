@@ -1,0 +1,10 @@
+---
+- name: Configure the NodeSource APT key
+  apt_key: url=https://deb.nodesource.com/gpgkey/nodesource.gpg.key state=present
+
+- name: Configure the NodeSource APT repositories
+  apt_repository: repo="deb https://deb.nodesource.com/node {{ ansible_distribution_release }} main"
+                  state=present
+
+- name: Install Node.js
+  apt: pkg=nodejs={{ nodejs_version }} state=present
