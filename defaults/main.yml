@@ -1,2 +1,4 @@
 ---
-nodejs_version: "0.10.32-1nodesource1~trusty1"
+nodejs_version: "0.10.32"
+nodejs_os: linux
+nodejs_arch: x64
