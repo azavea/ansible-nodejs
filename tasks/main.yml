@@ -1,10 +1,20 @@
 ---
-- name: Configure the NodeSource APT key
-  apt_key: url=https://deb.nodesource.com/gpgkey/nodesource.gpg.key state=present
+- name: Download Node.js
+  get_url: >
+    url=http://nodejs.org/dist/v{{ nodejs_version }}/node-v{{ nodejs_version }}-{{ nodejs_os }}-{{ nodejs_arch }}.tar.gz
+    dest=/usr/local/src/node-v{{ nodejs_version }}-{{ nodejs_os }}-{{ nodejs_arch }}.tar.gz
 
-- name: Configure the NodeSource APT repositories
-  apt_repository: repo="deb https://deb.nodesource.com/node {{ ansible_distribution_release }} main"
-                  state=present
+- name: Extract and install Node.js
+  unarchive: src=/usr/local/src/node-v{{ nodejs_version }}-{{ nodejs_os }}-{{ nodejs_arch }}.tar.gz
+             dest=/usr/local
+             copy=no
+             creates=/usr/local/node-v{{ nodejs_version }}-{{ nodejs_os }}-{{ nodejs_arch }}
 
-- name: Install Node.js
-  apt: pkg=nodejs={{ nodejs_version }} state=present
+- name: Symlink Node.js into /usr/local/bin
+  file: >
+    src=/usr/local/node-v{{ nodejs_version }}-{{ nodejs_os }}-{{ nodejs_arch }}/bin/{{ item }}
+    dest=/usr/local/bin/{{ item }}
+    state=link
+  with_items:
+    - node
+    - npm
