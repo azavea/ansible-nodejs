@@ -1,3 +1,7 @@
+## 0.3.0
+
+- Add tasks to update the installed version of npm.
+
 ## 0.2.0
 
 - Replace NodeSource repository with binary downloads directly from nodejs.org.
