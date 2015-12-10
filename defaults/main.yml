@@ -3,3 +3,4 @@ nodejs_version: "0.10.32"
 nodejs_os: linux
 nodejs_arch: x64
 nodejs_npm_version: 1.4.28
+nodejs_symlink_path: "/usr/local/bin"
