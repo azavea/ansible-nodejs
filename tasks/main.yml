@@ -13,14 +13,14 @@
 - name: Symlink Node.js into /usr/local/bin
   file: >
     src=/usr/local/node-v{{ nodejs_version }}-{{ nodejs_os }}-{{ nodejs_arch }}/bin/{{ item }}
-    dest=/usr/local/bin/{{ item }}
+    dest={{ nodejs_symlink_path }}/{{ item }}
     state=link
   with_items:
     - node
     - npm
 
 - name: Determine what version of NPM is installed
-  command: npm --version
+  command: "{{ nodejs_symlink_path }}/npm --version"
   register: installed_npm_version
 
 - name: Upgrade NPM
